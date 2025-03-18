@@ -6,6 +6,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { useContext } from "react";
 import DarkModeContext from "../utils/darkModeContext"; 
 import { CDN_URL } from "../utils/constants";
+import { cors_API } from "../utils/constants";
 
 const Body = () => {
     const [resList, setResList] = useState([]);
@@ -21,10 +22,10 @@ const Body = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+            cors_API+"https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         );
-        const json = await data.json();
         
+        const json = await data.json();
         const items = json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info || [];
         setWhatsonurmind(items);
 

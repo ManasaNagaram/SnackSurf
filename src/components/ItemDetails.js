@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-
+import { cors_API } from '../utils/constants';
 const ItemDetails = () => {
   const { id } = useParams();  // Get the item ID from the URL
   const [itemData, setItemData] = useState(null);
@@ -12,7 +12,7 @@ const ItemDetails = () => {
     const fetchItemDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&collection={id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`);
+        const response = await fetch(cors_API+`https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&collection={id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`);
         if (!response.ok) {
           throw new Error('Item not found');
         }
