@@ -6,18 +6,26 @@ export async function handler(event) {
   }
 
   try {
-    const response = await fetch(url);
-    const data = await response.text();
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+      },
+    });
+
+    const contentType = response.headers.get("content-type");
 
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",  // Fixes CORS
-        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", // ✅ Allows frontend access
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Content-Type": contentType || "application/json",
       },
-      body: data,
+      body: await response.text(),
     };
   } catch (error) {
-    return { statusCode: 500, body: "Error fetching data" };
+    return { statusCode: 500, body: `Fetch error: ${error.message}` };
   }
 }
