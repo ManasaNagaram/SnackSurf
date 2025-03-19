@@ -12,7 +12,8 @@ const ItemDetails = () => {
     const fetchItemDetails = async () => {
       try {
         setLoading(true);
-        const encoded_URL = encodeURIComponent(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&collection={id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`);    
+        const swiggy_API = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&collection=${id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`;
+        const encoded_URL = encodeURIComponent(swiggy_API);
         const response = await fetch(`${cors_API}?url=${encoded_URL}`);
         if (!response.ok) {
           throw new Error('Item not found');
