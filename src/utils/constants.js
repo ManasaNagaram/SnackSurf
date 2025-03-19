@@ -1,4 +1,4 @@
-export const cors_API = "https://snacksurf.netlify.app/api?url=";
+export const cors_API = "https://snacksurf.netlify.app/api?";
 export const LOGO_URL = "https://cdn.dribbble.com/userupload/16229601/file/original-6b1a728052819b02f17b15b275d9e233.jpg?resize=400x0";
 export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 export const MENU_API = cors_API+"https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.406498&lng=78.47724389999999&restaurantId="
