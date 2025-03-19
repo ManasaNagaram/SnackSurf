@@ -2,7 +2,13 @@ export async function handler(event) {
   const url = event.queryStringParameters.url;
 
   if (!url) {
-    return { statusCode: 400, body: "Missing 'url' query parameter" };
+    return {
+      statusCode: 400,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: "Missing 'url' query parameter",
+    };
   }
 
   try {
@@ -14,9 +20,29 @@ export async function handler(event) {
     });
 
     const contentType = response.headers.get("content-type");
+    const body = await response.text(); // Keep as text to avoid JSON parsing issues
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Content-Type": contentType || "application/json",
+      },
+      body: body,
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ error: error.toString() }),
+    };
+  }
+}
+: 200,
       headers: {
         "Access-Control-Allow-Origin": "*", // ✅ Allows frontend access
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
