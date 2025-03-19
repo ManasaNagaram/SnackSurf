@@ -25,7 +25,7 @@ export async function handler(event) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*", // ✅ Allows frontend access
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
         "Content-Type": contentType || "application/json",
@@ -40,18 +40,5 @@ export async function handler(event) {
       },
       body: JSON.stringify({ error: error.toString() }),
     };
-  }
-}
-: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*", // ✅ Allows frontend access
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Content-Type": contentType || "application/json",
-      },
-      body: await response.text(),
-    };
-  } catch (error) {
-    return { statusCode: 500, body: `Fetch error: ${error.message}` };
   }
 }
